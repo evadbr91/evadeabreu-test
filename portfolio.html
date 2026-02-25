@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Eva De Abreu</title>
+  <meta name="description" content="Portfolio : visuels, réseaux sociaux, sites web." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="blobs" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <div class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
+        <div>
+          <div class="name">Eva De Abreu</div>
+          <div class="sub">Communication & Marketing — Freelance</div>
+        </div>
+      </div>
+
+      <div class="linksWrap" aria-label="Menu">
+        <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
+
+        <nav class="links" id="topLinks">
+          <a href="index.html">Accueil</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
+
+        <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu">☰</button>
+      </div>
+
+      <div class="nav-right">
+        <a class="pill" href="tel:+33765232469">📞 Appeler</a>
+        <a class="pill primary" href="contact.html">Demander un devis</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobileNav" id="mobileNav" aria-hidden="true">
+    <div class="mobileCard card">
+      <div class="mobileHead">
+        <b>Menu</b>
+        <button class="mobileClose" id="mobileClose" type="button" aria-label="Fermer">✕</button>
+      </div>
+      <div class="mobileLinks">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn primary" href="contact.html" style="width:100%; justify-content:center;">Demander un devis</a>
+        <a class="btn" href="tel:+33765232469" style="width:100%; justify-content:center;">📞 Appeler</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="card pageHead glow-hover reveal">
+      <h1>Portfolio</h1>
+      <p>Filtre par type + aperçu en grand (image entière + zoom). Et tes projets web en direct.</p>
+    </div>
+
+    <section class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Réalisations"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Visuels • Réseaux sociaux • Sites</p>
+      </div>
+
+      <div class="gallery-actions">
+        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
+        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
+        <button type="button" class="seg" data-cat="sites">Sites internet</button>
+      </div>
+
+      <div class="gallery" id="galleryGrid">
+        <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
+          <img src="produit-the.jpg" alt="Visuel produit / branding" onerror="this.src='brand-photo.jpg'">
+          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
+        </div>
+
+        <div class="shot" data-cat="visuels" data-title="Menu — Restauration" data-src="menu-resto.jpg">
+          <img src="menu-resto.jpg" alt="Menu" onerror="this.src='brand-photo.jpg'">
+          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="miniTag">Visuel</div></div>
+        </div>
+
+        <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
+          <img src="matchday.jpg" alt="Story" onerror="this.src='brand-photo.jpg'">
+          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
+        </div>
+
+        <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
+          <img src="classico.jpg" alt="Annonce" onerror="this.src='brand-photo.jpg'">
+          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
+        </div>
+
+        <div class="shot" data-cat="sites" data-title="MONELEC" data-src="brand-photo.jpg">
+          <img src="brand-photo.jpg" alt="Site Monelec">
+          <div class="cap"><div><b>MONELEC</b><br><span>Site web</span></div><div class="miniTag">Sites</div></div>
+        </div>
+
+        <div class="shot" data-cat="sites" data-title="ASTH-YA" data-src="brand-photo.jpg">
+          <img src="brand-photo.jpg" alt="Site ASTH-YA">
+          <div class="cap"><div><b>ASTH-YA</b><br><span>Site web</span></div><div class="miniTag">Sites</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Sites web"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Projets live — aperçu + lien direct.</p>
+      </div>
+
+      <div class="sitesWrap">
+        <div class="sitesTrack" aria-label="Carrousel sites web">
+          <article class="siteCard glow-hover">
+            <div class="siteTop">
+              <div class="siteTitle">MONELEC — Site artisan</div>
+              <div class="siteDesc">Site vitrine : services, confiance + contact.</div>
+            </div>
+
+            <div class="sitePreview">
+              <iframe class="siteFrame" src="https://evadbr91.github.io/Monelec/" loading="lazy" title="Aperçu site Monelec"></iframe>
+            </div>
+
+            <div class="siteBottom">
+              <a class="btn primary" href="https://evadbr91.github.io/Monelec/" target="_blank" rel="noopener">Voir le site</a>
+              <a class="btn ghost" href="contact.html">Demander un site</a>
+            </div>
+          </article>
+
+          <article class="siteCard glow-hover">
+            <div class="siteTop">
+              <div class="siteTitle">ASTH-YA — Site vitrine</div>
+              <div class="siteDesc">Présentation pro : identité, sections clean et responsive.</div>
+            </div>
+
+            <div class="sitePreview">
+              <iframe class="siteFrame" src="https://evadbr91.github.io/asth-ya/" loading="lazy" title="Aperçu site ASTH-YA"></iframe>
+            </div>
+
+            <div class="siteBottom">
+              <a class="btn primary" href="https://evadbr91.github.io/asth-ya/" target="_blank" rel="noopener">Voir le site</a>
+              <a class="btn ghost" href="contact.html">Demander un site</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
+        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-card" role="dialog" aria-modal="true">
+      <div class="lb-top">
+        <b id="lbTitle">Aperçu</b>
+        <div class="lb-actions">
+          <button id="lbZoom" type="button" title="Zoom">Zoom</button>
+          <button id="lbClose" type="button">Fermer ✕</button>
+        </div>
+      </div>
+      <div class="lb-img" id="lbArea" title="Clique pour zoomer">
+        <img id="lbImg" src="" alt="">
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
