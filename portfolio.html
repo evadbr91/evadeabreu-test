@@ -19,49 +19,53 @@
 
   <div class="nav">
     <div class="wrap">
-      <div class="brand">
+      <a class="brand" href="index.html" aria-label="Retour à l’accueil">
         <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
         <div>
           <div class="name">Eva De Abreu</div>
           <div class="sub">Communication & Marketing — Freelance</div>
         </div>
-      </div>
+      </a>
 
-      <div class="linksWrap" aria-label="Menu">
-        <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
-
+      <div class="linksWrap" aria-label="Menu desktop">
         <nav class="links" id="topLinks">
           <a href="index.html">Accueil</a>
           <a href="services.html">Services</a>
-          <a href="portfolio.html">Portfolio</a>
+          <a href="portfolio.html" class="active">Portfolio</a>
           <a href="contact.html">Contact</a>
         </nav>
-
-        <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
-
-        <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu">☰</button>
       </div>
 
       <div class="nav-right">
         <a class="pill" href="tel:+33765232469">📞 Appeler</a>
         <a class="pill primary" href="contact.html">Demander un devis</a>
       </div>
-    </div>
-  </div>
 
-  <div class="mobileNav" id="mobileNav" aria-hidden="true">
-    <div class="mobileCard card">
-      <div class="mobileHead">
-        <b>Menu</b>
-        <button class="mobileClose" id="mobileClose" type="button" aria-label="Fermer">✕</button>
-      </div>
-      <div class="mobileLinks">
-        <a href="index.html">Accueil</a>
-        <a href="services.html">Services</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
-        <a class="btn primary" href="contact.html" style="width:100%; justify-content:center;">Demander un devis</a>
-        <a class="btn" href="tel:+33765232469" style="width:100%; justify-content:center;">📞 Appeler</a>
+      <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
+      <div class="mobileCard">
+        <div class="mobileTop">
+          <b>Menu</b>
+          <button class="mobileClose" id="mobileClose" type="button" aria-label="Fermer">✕</button>
+        </div>
+
+        <nav class="mobileLinks" aria-label="Navigation mobile">
+          <a href="index.html" class="mLink">Accueil</a>
+          <a href="services.html" class="mLink">Services</a>
+          <a href="portfolio.html" class="mLink">Portfolio</a>
+          <a href="contact.html" class="mLink">Contact</a>
+        </nav>
+
+        <div class="mobileCtas">
+          <a class="btn primary" href="contact.html">Demander un devis</a>
+          <a class="btn" href="tel:+33765232469">📞 Appeler</a>
+          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://www.instagram.com/edbra_nd/" target="_blank" rel="noopener">Instagram</a>
+        </div>
       </div>
     </div>
   </div>
@@ -162,8 +166,16 @@
 
     <footer>
       <div class="foot">
-        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
-        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
+        <div>
+          <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
+          <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
+          <div class="muted2" style="margin-top:8px; line-height:1.6">
+            SIRET : 10168913100015 • TVA non applicable, art. 293 B du CGI • Hébergement : OVH<br>
+            <a href="mentions-legales.html">Mentions légales</a> •
+            <a href="politique-confidentialite.html">Confidentialité</a> •
+            <a href="conditions-prestations.html">Conditions</a>
+          </div>
+        </div>
       </div>
     </footer>
   </main>
