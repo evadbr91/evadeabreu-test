@@ -1,7 +1,11 @@
+/* ========= EVA — MAIN.JS (COMPLET + FIX MENU) ========= */
+
+/* Year */
 document.querySelectorAll("#y, #year").forEach(el => {
   el.textContent = new Date().getFullYear();
 });
 
+/* Reveal on scroll */
 (() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -15,22 +19,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
   document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 })();
 
-(() => {
-  const skillsBox = document.getElementById("skillsBox");
-  if (!skillsBox) return;
-
-  const obs2 = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        skillsBox.classList.add("on");
-        obs2.disconnect();
-      }
-    });
-  }, { threshold: 0.3 });
-
-  obs2.observe(skillsBox);
-})();
-
+/* Typewriter titles */
 (() => {
   function typeOnce(el) {
     const target = el.getAttribute("data-text") || "";
@@ -48,11 +37,8 @@ document.querySelectorAll("#y, #year").forEach(el => {
       if (now - last < speed) { requestAnimationFrame(step); return; }
       last = now;
       out.textContent = target.slice(0, i++);
-      if (i <= target.length) {
-        requestAnimationFrame(step);
-      } else {
-        if (caret) caret.style.opacity = "0.0";
-      }
+      if (i <= target.length) requestAnimationFrame(step);
+      else if (caret) caret.style.opacity = "0.0";
     }
     requestAnimationFrame(step);
   }
@@ -69,6 +55,25 @@ document.querySelectorAll("#y, #year").forEach(el => {
   document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
 })();
 
+/* Active link auto (desktop + mobile) */
+(() => {
+  const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  const isHome = path === "" || path === "index.html";
+
+  function markActive(selector, activeClass) {
+    document.querySelectorAll(selector).forEach(a => {
+      const href = (a.getAttribute("href") || "").toLowerCase();
+      const file = href.split("/").pop();
+      const on = (isHome && (file === "" || file === "index.html")) || (file === path);
+      a.classList.toggle(activeClass, on);
+    });
+  }
+
+  markActive(".links a", "active");
+  markActive(".mobileLinks a", "active");
+})();
+
+/* Nav arrows (scroll horizontal links) */
 (() => {
   const el = document.getElementById("topLinks");
   const left = document.getElementById("navLeft");
@@ -84,13 +89,48 @@ document.querySelectorAll("#y, #year").forEach(el => {
     el.scrollBy({ left: dx, behavior: "smooth" });
   }
 
-  left.addEventListener("click", () => scrollByX(-220));
-  right.addEventListener("click", () => scrollByX(220));
+  left.addEventListener("click", () => scrollByX(-240));
+  right.addEventListener("click", () => scrollByX(240));
   window.addEventListener("resize", refresh);
   setTimeout(refresh, 80);
   refresh();
 })();
 
+/* Burger + drawer */
+(() => {
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("mobileMenu");
+  const closeBtn = document.getElementById("mobileClose");
+  if(!burger || !menu || !closeBtn) return;
+
+  function openMenu(){
+    menu.classList.add("open");
+    menu.setAttribute("aria-hidden","false");
+    burger.setAttribute("aria-expanded","true");
+    document.body.style.overflow = "hidden";
+  }
+  function closeMenu(){
+    menu.classList.remove("open");
+    menu.setAttribute("aria-hidden","true");
+    burger.setAttribute("aria-expanded","false");
+    document.body.style.overflow = "";
+  }
+
+  burger.addEventListener("click", () => {
+    menu.classList.contains("open") ? closeMenu() : openMenu();
+  });
+  closeBtn.addEventListener("click", closeMenu);
+
+  menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
+
+  menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+
+  window.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeMenu();
+  });
+})();
+
+/* Portfolio filter */
 (() => {
   const segs = Array.from(document.querySelectorAll(".seg"));
   const shots = Array.from(document.querySelectorAll(".shot"));
@@ -107,6 +147,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
   setCat("visuels");
 })();
 
+/* Lightbox */
 (() => {
   const lb = document.getElementById("lightbox");
   const lbImg = document.getElementById("lbImg");
@@ -172,103 +213,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
 })();
 
-(() => {
-  const packInput = document.getElementById("fPack");
-  function goContactWithPack(packName) {
-    if (packInput && packName) packInput.value = packName;
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    setTimeout(() => document.getElementById("fEmail")?.focus(), 450);
-  }
-  document.querySelectorAll(".choosePack").forEach(btn => {
-    btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
-  });
-})();
-
-(() => {
-  const track = document.getElementById("packsTrack");
-  const prev = document.getElementById("packPrev");
-  const next = document.getElementById("packNext");
-  if (!track || !prev || !next) return;
-
-  function isDesktop() {
-    return window.matchMedia("(min-width: 980px)").matches;
-  }
-
-  function refresh() {
-    if (isDesktop()) {
-      prev.style.display = "none";
-      next.style.display = "none";
-      return;
-    }
-    const overflow = track.scrollWidth > track.clientWidth + 4;
-    prev.style.display = overflow ? "inline-flex" : "none";
-    next.style.display = overflow ? "inline-flex" : "none";
-  }
-
-  function scrollByCard(dir) {
-    const card = track.querySelector(".packCard");
-    const dx = (card ? card.getBoundingClientRect().width : 320) + 12;
-    track.scrollBy({ left: dir * dx, behavior: "smooth" });
-  }
-
-  prev.addEventListener("click", () => scrollByCard(-1));
-  next.addEventListener("click", () => scrollByCard(1));
-  window.addEventListener("resize", () => setTimeout(refresh, 60));
-  setTimeout(refresh, 80);
-  refresh();
-})();
-
-(() => {
-  const EMAIL = "deabreue9@gmail.com";
-  const copyMailBtn = document.getElementById("copyMailBtn");
-  if (!copyMailBtn) return;
-
-  function copyToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    ta.remove();
-    return Promise.resolve();
-  }
-
-  copyMailBtn.addEventListener("click", async () => {
-    await copyToClipboard(EMAIL);
-    const old = copyMailBtn.textContent;
-    copyMailBtn.textContent = "Copié ✅";
-    setTimeout(() => copyMailBtn.textContent = old || "Copier mon email", 1200);
-  });
-})();
-
-(() => {
-  const quoteForm = document.getElementById("quoteForm");
-  const successBox = document.getElementById("successBox");
-  const sendBtn = document.getElementById("sendBtn");
-  if (!quoteForm || !successBox || !sendBtn) return;
-
-  quoteForm.addEventListener("submit", () => {
-    sendBtn.textContent = "Envoi...";
-    successBox.classList.add("on");
-  });
-})();
-
-(() => {
-  const IG_URL = "https://www.instagram.com/edbra_nd/";
-  const igBtn = document.getElementById("igBtn");
-  if (!igBtn) return;
-
-  if (IG_URL && IG_URL.startsWith("http")) {
-    igBtn.href = IG_URL;
-    igBtn.target = "_blank";
-    igBtn.rel = "noopener";
-    igBtn.textContent = "Instagram";
-    igBtn.removeAttribute("aria-disabled");
-    igBtn.removeAttribute("title");
-  }
-})();
-
+/* Reviews (home only if elements exist) */
 (function initReviews(){
   const track = document.getElementById("reviewsTrack");
   const dots = document.getElementById("revDots");
@@ -280,11 +225,11 @@ document.querySelectorAll("#y, #year").forEach(el => {
   if(!track || !dots || !prev || !next) return;
 
   const reviews = [
-    { name:"Dorian", stars:5, meta:"Avis Google • il y a 18 heures", text:"Je recommande grandement ses services ! Très professionnel et réactive. Visité en février." },
-    { name:"Sheylie Berkane", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février." },
-    { name:"Sandiyya", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande sans hésiter ses services ! Visité en janvier." },
-    { name:"Patrick Mat", stars:5, meta:"Avis Google • il y a 14 heures • Nouveau", text:"Personne agréable, très professionnelle, toujours a l'écoute. Un travail au top je recommande a 1000% ! Visité en février." },
-    { name:"Sylvie Materne", stars:5, meta:"Avis Google • il y a 15 heures • Nouveau", text:"Travail impeccable, personne agréable et sérieuse. Je recommande son professionnalisme ! Je suis ravie. Merci beaucoup. Visité en février." }
+    { name:"Dorian", stars:5, meta:"Avis • récent", text:"Je recommande grandement ses services ! Très professionnelle et réactive." },
+    { name:"Sheylie", stars:5, meta:"Avis • récent", text:"Très réactive, c’était un grand plaisir d’obtenir son aide !" },
+    { name:"Sandiyya", stars:5, meta:"Avis • récent", text:"Je recommande sans hésiter ses services." },
+    { name:"Patrick", stars:5, meta:"Avis • récent", text:"Toujours à l'écoute. Un travail au top, je recommande !" },
+    { name:"Sylvie", stars:5, meta:"Avis • récent", text:"Travail impeccable, personne agréable et sérieuse. Merci !" }
   ];
 
   function starsStr(n){
@@ -317,10 +262,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
 
   function perView(){ return mq.matches ? 2 : 1; }
   function pages(){ return Math.max(1, Math.ceil(reviews.length / perView())); }
-
-  function pageWidth(){
-    return track.clientWidth || 1;
-  }
+  function pageWidth(){ return track.clientWidth || 1; }
 
   function scrollToIdx(smooth){
     const left = pageWidth() * idx;
@@ -364,10 +306,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
     const elapsed = now - startAt;
     const t = Math.min(1, elapsed / DURATION);
     if(prog) prog.style.width = `${Math.round(t*100)}%`;
-    if(t >= 1){
-      nextOne();
-      return;
-    }
+    if(t >= 1){ nextOne(); return; }
     raf = requestAnimationFrame(tick);
   }
 
@@ -378,16 +317,11 @@ document.querySelectorAll("#y, #year").forEach(el => {
     raf = requestAnimationFrame(tick);
   }
 
-  function restart(){
-    start();
-  }
-
   function go(n, smooth){
-    idx = n;
-    clampIdx();
+    idx = n; clampIdx();
     scrollToIdx(smooth);
     updateDots();
-    restart();
+    start();
   }
 
   function nextOne(){ go(idx + 1, true); }
@@ -414,7 +348,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
       if (newIdx !== idx) {
         idx = newIdx;
         updateDots();
-        restart();
+        start();
       }
     }, 80);
   }, { passive: true });
@@ -442,39 +376,4 @@ document.querySelectorAll("#y, #year").forEach(el => {
   buildDots();
   scrollToIdx(false);
   start();
-})();
-
-(() => {
-  const burger = document.getElementById("burger");
-  const menu = document.getElementById("mobileMenu");
-  const closeBtn = document.getElementById("mobileClose");
-  if(!burger || !menu || !closeBtn) return;
-
-  function openMenu(){
-    menu.classList.add("open");
-    menu.setAttribute("aria-hidden","false");
-    burger.setAttribute("aria-expanded","true");
-    document.body.style.overflow = "hidden";
-  }
-  function closeMenu(){
-    menu.classList.remove("open");
-    menu.setAttribute("aria-hidden","true");
-    burger.setAttribute("aria-expanded","false");
-    document.body.style.overflow = "";
-  }
-
-  burger.addEventListener("click", () => {
-    menu.classList.contains("open") ? closeMenu() : openMenu();
-  });
-  closeBtn.addEventListener("click", closeMenu);
-
-  menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
-
-  menu.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", () => closeMenu());
-  });
-
-  window.addEventListener("keydown", (e) => {
-    if(e.key === "Escape") closeMenu();
-  });
 })();
