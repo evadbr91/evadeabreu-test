@@ -6,7 +6,7 @@
   <title>Portfolio — Eva De Abreu</title>
   <meta name="description" content="Portfolio : visuels, réseaux sociaux, sites web." />
   <meta name="theme-color" content="#07070c" />
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260226">
 </head>
 
 <body>
@@ -17,6 +17,7 @@
     <div class="blob b3"></div>
   </div>
 
+  <!-- NAV -->
   <div class="nav">
     <div class="wrap">
       <a class="brand" href="index.html" aria-label="Retour à l’accueil">
@@ -27,13 +28,18 @@
         </div>
       </a>
 
-      <div class="linksWrap" aria-label="Menu desktop">
+      <div class="linksWrap" aria-label="Menu">
+        <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
         <nav class="links" id="topLinks">
           <a href="index.html">Accueil</a>
           <a href="services.html">Services</a>
-          <a href="portfolio.html" class="active">Portfolio</a>
+          <a href="portfolio.html">Portfolio</a>
           <a href="contact.html">Contact</a>
+          <a href="mentions-legales.html">Mentions</a>
+          <a href="politique-confidentialite.html">Confidentialité</a>
+          <a href="conditions-prestations.html">Conditions</a>
         </nav>
+        <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
       </div>
 
       <div class="nav-right">
@@ -58,6 +64,9 @@
           <a href="services.html" class="mLink">Services</a>
           <a href="portfolio.html" class="mLink">Portfolio</a>
           <a href="contact.html" class="mLink">Contact</a>
+          <a href="mentions-legales.html" class="mLink">Mentions légales</a>
+          <a href="politique-confidentialite.html" class="mLink">Confidentialité</a>
+          <a href="conditions-prestations.html" class="mLink">Conditions</a>
         </nav>
 
         <div class="mobileCtas">
@@ -69,6 +78,7 @@
       </div>
     </div>
   </div>
+  <!-- /NAV -->
 
   <main class="wrap">
     <div class="card pageHead glow-hover reveal">
@@ -110,7 +120,7 @@
         </div>
 
         <div class="shot" data-cat="sites" data-title="MONELEC" data-src="brand-photo.jpg">
-          <img src="brand-photo.jpg" alt="Site Monelec">
+          <img src="brand-photo.jpg" alt="Site MONELEC">
           <div class="cap"><div><b>MONELEC</b><br><span>Site web</span></div><div class="miniTag">Sites</div></div>
         </div>
 
@@ -134,11 +144,9 @@
               <div class="siteTitle">MONELEC — Site artisan</div>
               <div class="siteDesc">Site vitrine : services, confiance + contact.</div>
             </div>
-
             <div class="sitePreview">
-              <iframe class="siteFrame" src="https://evadbr91.github.io/Monelec/" loading="lazy" title="Aperçu site Monelec"></iframe>
+              <iframe class="siteFrame" src="https://evadbr91.github.io/Monelec/" loading="lazy" title="Aperçu site MONELEC"></iframe>
             </div>
-
             <div class="siteBottom">
               <a class="btn primary" href="https://evadbr91.github.io/Monelec/" target="_blank" rel="noopener">Voir le site</a>
               <a class="btn ghost" href="contact.html">Demander un site</a>
@@ -150,11 +158,9 @@
               <div class="siteTitle">ASTH-YA — Site vitrine</div>
               <div class="siteDesc">Présentation pro : identité, sections clean et responsive.</div>
             </div>
-
             <div class="sitePreview">
               <iframe class="siteFrame" src="https://evadbr91.github.io/asth-ya/" loading="lazy" title="Aperçu site ASTH-YA"></iframe>
             </div>
-
             <div class="siteBottom">
               <a class="btn primary" href="https://evadbr91.github.io/asth-ya/" target="_blank" rel="noopener">Voir le site</a>
               <a class="btn ghost" href="contact.html">Demander un site</a>
@@ -168,12 +174,14 @@
       <div class="foot">
         <div>
           <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
-          <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
-          <div class="muted2" style="margin-top:8px; line-height:1.6">
-            SIRET : 10168913100015 • TVA non applicable, art. 293 B du CGI • Hébergement : OVH<br>
+          <div class="muted2">
+            SIRET : 10168913100015 • TVA non applicable, art. 293 B du CGI • Hébergement : OVH •
+            <a href="mailto:contact@evadeabreu.fr">contact@evadeabreu.fr</a>
+          </div>
+          <div class="muted2" style="margin-top:6px;">
             <a href="mentions-legales.html">Mentions légales</a> •
-            <a href="politique-confidentialite.html">Confidentialité</a> •
-            <a href="conditions-prestations.html">Conditions</a>
+            <a href="politique-confidentialite.html">Politique de confidentialité</a> •
+            <a href="conditions-prestations.html">Conditions de prestations</a>
           </div>
         </div>
       </div>
@@ -195,6 +203,6 @@
     </div>
   </div>
 
-  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/main.js?v=20260226" defer></script>
 </body>
 </html>
