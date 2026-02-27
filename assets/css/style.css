@@ -1206,3 +1206,108 @@ html{scroll-behavior:smooth}
 }
 .miniFoot .btn{ width:100%; }
 @media(min-width:520px){ .miniFoot .btn{ width:auto; } }
+/* Instagram phone showcase */
+
+.igShowcase{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:24px;
+  align-items:center;
+  margin-top:30px;
+}
+
+@media(max-width:980px){
+  .igShowcase{
+    grid-template-columns:1fr;
+  }
+}
+
+.phoneWrap{
+  display:flex;
+  justify-content:center;
+}
+
+.phone{
+  width: min(360px, 95%);
+  border-radius:36px;
+  border:1px solid rgba(255,255,255,.14);
+  background: linear-gradient(145deg,#0c0c14,#090912);
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  overflow:hidden;
+  position:relative;
+  transition: transform .3s ease;
+}
+
+.phone:hover{
+  transform: translateY(-6px);
+}
+
+.phoneTop{
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  position:relative;
+}
+
+.cam{
+  position:absolute;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  width:60px;
+  height:6px;
+  border-radius:20px;
+  background:rgba(255,255,255,.15);
+}
+
+.phoneTitle{
+  font-weight:900;
+  font-size:14px;
+  color:rgba(255,255,255,.85);
+}
+
+.phoneScreen{
+  height:520px;
+  overflow:hidden;
+  background:#000;
+  position:relative;
+}
+
+.phoneScroll{
+  display:flex;
+  flex-direction:column;
+  animation: igScroll 20s linear infinite;
+}
+
+.phoneScroll img{
+  width:100%;
+  display:block;
+}
+
+@keyframes igScroll{
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+.phone:hover .phoneScroll{
+  animation-play-state: paused;
+}
+
+.phoneBottom{
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.phoneBottom span{
+  width:18px;
+  height:18px;
+  border-radius:6px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.06);
+}
