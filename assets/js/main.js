@@ -1,8 +1,8 @@
-/* ========= EVA — MAIN.JS (COMPLET + FIX MENU) ========= */
+/* ========= EVA — MAIN.JS (COMPLET + FIX MENU + PORTFOLIO) ========= */
 
 /* Year */
 document.querySelectorAll("#y, #year").forEach(el => {
-  el.textContent = new Date().getFullYear();
+  if (el) el.textContent = new Date().getFullYear();
 });
 
 /* Reveal on scroll */
@@ -123,6 +123,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
 
   menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
 
+  // ✅ FIX : protège si aucun lien
   menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
 
   window.addEventListener("keydown", (e) => {
@@ -130,7 +131,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
 })();
 
-/* Portfolio filter */
+/* Portfolio filter (robuste + garde la cat active si déjà sélectionnée) */
 (() => {
   const segs = Array.from(document.querySelectorAll(".seg"));
   const shots = Array.from(document.querySelectorAll(".shot"));
@@ -144,7 +145,9 @@ document.querySelectorAll("#y, #year").forEach(el => {
   }
 
   segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
-  setCat("visuels");
+
+  const current = segs.find(s => s.classList.contains("active"))?.dataset.cat || "visuels";
+  setCat(current);
 })();
 
 /* Lightbox */
@@ -159,6 +162,8 @@ document.querySelectorAll("#y, #year").forEach(el => {
 
   if (!lb || !lbImg || !lbTitle || !lbClose || !lbZoom || !lbArea || !shots.length) return;
 
+  let z = 1;
+
   function openLB(src, title) {
     lbTitle.textContent = title || "Aperçu";
     lbImg.src = src;
@@ -169,6 +174,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
     lbArea.classList.remove("zoom");
     lbImg.style.transform = "scale(1)";
     lbZoom.textContent = "Zoom";
+    z = 1;
   }
   function closeLB() {
     lb.classList.remove("open");
@@ -178,6 +184,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
     lbArea.classList.remove("zoom");
     lbImg.style.transform = "scale(1)";
     lbZoom.textContent = "Zoom";
+    z = 1;
   }
   function toggleZoom() {
     const on = lbArea.classList.toggle("zoom");
@@ -195,7 +202,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
     if (e.target === lbImg || e.target === lbArea) toggleZoom();
   });
 
-  let z = 1;
   lbArea.addEventListener("wheel", (e) => {
     if (!lbArea.classList.contains("zoom")) return;
     e.preventDefault();
@@ -377,7 +383,8 @@ document.querySelectorAll("#y, #year").forEach(el => {
   scrollToIdx(false);
   start();
 })();
-// Onglets "Petits services" (robuste)
+
+/* Onglets "Petits services" (robuste) */
 (() => {
   const root = document.querySelector(".addons");
   if (!root) return;
@@ -395,14 +402,12 @@ document.querySelectorAll("#y, #year").forEach(el => {
     });
   }
 
-  // click via délégation (marche même si tu ajoutes des tabs après)
   root.addEventListener("click", (e) => {
     const btn = e.target.closest(".addTab");
     if (!btn) return;
     show(btn.dataset.add);
   });
 
-  // init
   const active = tabs.find(t => t.classList.contains("active"))?.dataset.add || tabs[0].dataset.add;
   show(active);
 })();
