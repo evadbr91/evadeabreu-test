@@ -1,4 +1,4 @@
-/* ========= EVA — MAIN.JS (COMPLET + FIX MENU + PORTFOLIO) ========= */
+/* ========= EVA — MAIN.JS (COMPLET + FIX MENU) ========= */
 
 /* Year */
 document.querySelectorAll("#y, #year").forEach(el => {
@@ -123,7 +123,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
 
   menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
 
-  // ✅ FIX : protège si aucun lien
   menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
 
   window.addEventListener("keydown", (e) => {
@@ -131,7 +130,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
 })();
 
-/* Portfolio filter (robuste + garde la cat active si déjà sélectionnée) */
+/* Portfolio filter */
 (() => {
   const segs = Array.from(document.querySelectorAll(".seg"));
   const shots = Array.from(document.querySelectorAll(".shot"));
@@ -146,6 +145,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
 
   segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
 
+  // ✅ init intelligent
   const current = segs.find(s => s.classList.contains("active"))?.dataset.cat || "visuels";
   setCat(current);
 })();
@@ -161,8 +161,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   const shots = Array.from(document.querySelectorAll(".shot"));
 
   if (!lb || !lbImg || !lbTitle || !lbClose || !lbZoom || !lbArea || !shots.length) return;
-
-  let z = 1;
 
   function openLB(src, title) {
     lbTitle.textContent = title || "Aperçu";
@@ -202,6 +200,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
     if (e.target === lbImg || e.target === lbArea) toggleZoom();
   });
 
+  let z = 1;
   lbArea.addEventListener("wheel", (e) => {
     if (!lbArea.classList.contains("zoom")) return;
     e.preventDefault();
