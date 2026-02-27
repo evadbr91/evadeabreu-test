@@ -377,3 +377,32 @@ document.querySelectorAll("#y, #year").forEach(el => {
   scrollToIdx(false);
   start();
 })();
+// Onglets "Petits services" (robuste)
+(() => {
+  const root = document.querySelector(".addons");
+  if (!root) return;
+
+  const tabs = Array.from(root.querySelectorAll(".addTab"));
+  const panels = Array.from(document.querySelectorAll(".addPanel"));
+
+  if (!tabs.length || !panels.length) return;
+
+  function show(key){
+    tabs.forEach(t => t.classList.toggle("active", t.dataset.add === key));
+    panels.forEach(p => {
+      const match = (p.dataset.panel === key);
+      p.style.display = match ? "" : "none";
+    });
+  }
+
+  // click via délégation (marche même si tu ajoutes des tabs après)
+  root.addEventListener("click", (e) => {
+    const btn = e.target.closest(".addTab");
+    if (!btn) return;
+    show(btn.dataset.add);
+  });
+
+  // init
+  const active = tabs.find(t => t.classList.contains("active"))?.dataset.add || tabs[0].dataset.add;
+  show(active);
+})();
