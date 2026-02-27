@@ -1,11 +1,7 @@
-/* ========= EVA — MAIN.JS (COMPLET + FIX MENU) ========= */
-
-/* Year */
 document.querySelectorAll("#y, #year").forEach(el => {
-  if (el) el.textContent = new Date().getFullYear();
+  el.textContent = new Date().getFullYear();
 });
 
-/* Reveal on scroll */
 (() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -19,7 +15,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 })();
 
-/* Typewriter titles */
 (() => {
   function typeOnce(el) {
     const target = el.getAttribute("data-text") || "";
@@ -55,7 +50,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
 })();
 
-/* Active link auto (desktop + mobile) */
 (() => {
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   const isHome = path === "" || path === "index.html";
@@ -73,7 +67,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   markActive(".mobileLinks a", "active");
 })();
 
-/* Nav arrows (scroll horizontal links) */
 (() => {
   const el = document.getElementById("topLinks");
   const left = document.getElementById("navLeft");
@@ -96,7 +89,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   refresh();
 })();
 
-/* Burger + drawer */
 (() => {
   const burger = document.getElementById("burger");
   const menu = document.getElementById("mobileMenu");
@@ -122,7 +114,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   closeBtn.addEventListener("click", closeMenu);
 
   menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
-
   menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
 
   window.addEventListener("keydown", (e) => {
@@ -130,95 +121,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
 })();
 
-/* Portfolio filter */
-(() => {
-  const segs = Array.from(document.querySelectorAll(".seg"));
-  const shots = Array.from(document.querySelectorAll(".shot"));
-  if (!segs.length || !shots.length) return;
-
-  function setCat(cat) {
-    segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
-    shots.forEach(it => {
-      it.style.display = (it.dataset.cat === cat) ? "" : "none";
-    });
-  }
-
-  segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
-
-  // ✅ init intelligent
-  const current = segs.find(s => s.classList.contains("active"))?.dataset.cat || "visuels";
-  setCat(current);
-})();
-
-/* Lightbox */
-(() => {
-  const lb = document.getElementById("lightbox");
-  const lbImg = document.getElementById("lbImg");
-  const lbTitle = document.getElementById("lbTitle");
-  const lbClose = document.getElementById("lbClose");
-  const lbZoom = document.getElementById("lbZoom");
-  const lbArea = document.getElementById("lbArea");
-  const shots = Array.from(document.querySelectorAll(".shot"));
-
-  if (!lb || !lbImg || !lbTitle || !lbClose || !lbZoom || !lbArea || !shots.length) return;
-
-  function openLB(src, title) {
-    lbTitle.textContent = title || "Aperçu";
-    lbImg.src = src;
-    lbImg.alt = title || "Aperçu";
-    lb.classList.add("open");
-    lb.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-    lbArea.classList.remove("zoom");
-    lbImg.style.transform = "scale(1)";
-    lbZoom.textContent = "Zoom";
-    z = 1;
-  }
-  function closeLB() {
-    lb.classList.remove("open");
-    lb.setAttribute("aria-hidden", "true");
-    lbImg.src = "";
-    document.body.style.overflow = "";
-    lbArea.classList.remove("zoom");
-    lbImg.style.transform = "scale(1)";
-    lbZoom.textContent = "Zoom";
-    z = 1;
-  }
-  function toggleZoom() {
-    const on = lbArea.classList.toggle("zoom");
-    lbZoom.textContent = on ? "Adapter" : "Zoom";
-    lbImg.style.transform = "scale(1)";
-    z = 1;
-  }
-
-  lbClose.addEventListener("click", closeLB);
-  lb.addEventListener("click", (e) => { if (e.target === lb) closeLB(); });
-  window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLB(); });
-
-  lbZoom.addEventListener("click", toggleZoom);
-  lbArea.addEventListener("click", (e) => {
-    if (e.target === lbImg || e.target === lbArea) toggleZoom();
-  });
-
-  let z = 1;
-  lbArea.addEventListener("wheel", (e) => {
-    if (!lbArea.classList.contains("zoom")) return;
-    e.preventDefault();
-    const delta = Math.sign(e.deltaY);
-    z = Math.max(1, Math.min(3, z + (delta > 0 ? -0.12 : 0.12)));
-    lbImg.style.transform = `scale(${z.toFixed(2)})`;
-  }, { passive: false });
-
-  shots.forEach(s => {
-    s.addEventListener("click", () => {
-      const src = s.getAttribute("data-src");
-      const title = s.getAttribute("data-title");
-      if (src) openLB(src, title);
-    });
-  });
-})();
-
-/* Reviews (home only if elements exist) */
 (function initReviews(){
   const track = document.getElementById("reviewsTrack");
   const dots = document.getElementById("revDots");
@@ -226,7 +128,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   const next = document.getElementById("revNext");
   const wrap = track?.closest(".reviews");
   const prog = document.getElementById("revProg");
-
   if(!track || !dots || !prev || !next) return;
 
   const reviews = [
@@ -383,14 +284,12 @@ document.querySelectorAll("#y, #year").forEach(el => {
   start();
 })();
 
-/* Onglets "Petits services" (robuste) */
 (() => {
   const root = document.querySelector(".addons");
   if (!root) return;
 
   const tabs = Array.from(root.querySelectorAll(".addTab"));
   const panels = Array.from(document.querySelectorAll(".addPanel"));
-
   if (!tabs.length || !panels.length) return;
 
   function show(key){
