@@ -1127,3 +1127,82 @@ html{scroll-behavior:smooth}
 }
 .aCtas .btn{ width:100%; }
 @media(min-width:520px){ .aCtas .btn{ width:auto; } }
+/* Mini services / onglets */
+.addons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.addTab{
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  color: var(--muted);
+  font-weight:950;
+  cursor:pointer;
+  transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+}
+.addTab:hover{ transform: translateY(-2px); filter:brightness(1.07); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18); }
+.addTab.active{
+  color:#07070c;
+  background: linear-gradient(135deg, rgba(34,211,238,.88), rgba(139,92,246,.88));
+  border-color: rgba(255,255,255,.16);
+}
+
+.addGrid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:12px;
+  margin-top:12px;
+}
+@media(max-width:980px){ .addGrid{ grid-template-columns: 1fr; } }
+
+.miniCard{
+  border-radius: var(--r);
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  box-shadow: var(--shadow2);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.miniTop{
+  padding:16px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.miniIcon{
+  width:42px;height:42px;
+  display:grid; place-items:center;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  flex:0 0 auto;
+}
+.miniTxt{ min-width:0; }
+.miniTxt b{ display:block; font-size:14px; }
+.miniTxt span{ display:block; margin-top:6px; color: var(--muted); font-size:12.8px; line-height:1.5; }
+
+.miniPrice{
+  padding:10px 12px;
+  border-radius:999px;
+  font-weight:950;
+  color:#07070c;
+  background: linear-gradient(135deg, rgba(34,211,238,.90), rgba(139,92,246,.92));
+  border:1px solid rgba(255,255,255,.16);
+  white-space:nowrap;
+  flex:0 0 auto;
+}
+.miniFoot{
+  padding:14px 16px 16px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.miniFoot .btn{ width:100%; }
+@media(min-width:520px){ .miniFoot .btn{ width:auto; } }
